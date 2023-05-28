@@ -1,0 +1,62 @@
+name: onoy_kg
+description: A new Flutter application.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.2.0+1
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  rxdart: ^0.27.7
+  get_it: ^7.2.0
+  rx_command: ^6.0.1
+  rx_widgets: ^4.1.0
+  pedantic: ^1.9.2
+  flutter_svg: ^2.0.2
+  http: ^0.13.1
+  email_validator: ^2.1.17
+  logger: ^1.2.2
+  toggle_switch: ^2.0.1
+  intl: ^0.18.0
+  recase: ^4.1.0
+  strings: ^0.2.2
+  firebase_core: ^2.7.0
+  firebase_auth: ^4.2.2
+  firebase_crashlytics: ^3.0.15
+  pinput: ^2.2.31
+  equatable: ^2.0.0
+  buttons_tabbar: ^1.1.2
+  image_picker: ^0.8.6+4
+  shared_preferences: ^2.0.18
+  flutter_native_image: ^0.0.5
+  # flutter_icons: ^1.1.0
+  flutter_launcher_icons: ^0.12.0
+dev_dependencies:
+  effective_dart: ^1.0.0
+  flutter_test:
+    sdk: flutter
+# dependency_overrides:
+#   firebase_core_platform_interface: 4.5.1
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/launcher_icon.png"
+
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+    - family: Gilroy
+      fonts:
+        - asset: fonts/Gilroy-Bold.ttf
+        - asset: fonts/Gilroy-Heavy.ttf
+        - asset: fonts/Gilroy-Light.ttf
+        - asset: fonts/Gilroy-Medium.ttf
+        - asset: fonts/Gilroy-Regular.ttf
