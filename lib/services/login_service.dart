@@ -122,7 +122,7 @@ class LoginServiceImplementation implements LoginService {
       final create = UserModel.fromJson(jsonData);
       return create;
     } else if (response.statusCode == 401) {
-      final create = UserModel();
+      final create = UserModel(registered: true);
       await prefs.setString('jwt', '');
       return create;
     } else {

@@ -15,7 +15,6 @@ import 'package:onoy_kg/ui/screens/main/main_screen.dart';
 
 import '../../service_locator.dart';
 
-
 class AuthForm extends StatefulWidget {
   AuthForm(this.userType);
 
@@ -27,7 +26,7 @@ class AuthForm extends StatefulWidget {
 
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
-  final _user = UserModel();
+  final _user = UserModel(registered: true);
   var loading = false;
   var textColor = Helpers.hintColor;
 
@@ -154,8 +153,8 @@ class _AuthFormState extends State<AuthForm> {
                       });
                       _user.phoneNumber = value;
 
-                      final result = await Navigator.of(context)
-                          .push(MaterialPageRoute(
+                      final result =
+                          await Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => OTPScreen(_user),
                       ));
                       _user.uidToken = result;
@@ -202,7 +201,8 @@ class _AuthFormState extends State<AuthForm> {
                         case ConnectionState.waiting:
                           return const CircularProgressIndicator();
                         case ConnectionState.active:
-                          return _statusResult2(context, snapshot.data as Response);
+                          return _statusResult2(
+                              context, snapshot.data as Response);
                         case ConnectionState.done:
                           return Text('${snapshot.data} (closed)');
                       }
@@ -220,7 +220,6 @@ class _AuthFormState extends State<AuthForm> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           elevation: 0,
-                        
                         ),
                         // color: Colors.transparent,
                         // elevation: 0,
@@ -282,8 +281,8 @@ class _AuthFormState extends State<AuthForm> {
       if (data.statusCode == 201) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-              content:  Text('Пользователь успешно создан!'),
-              duration:  Duration(seconds: 5),
+              content: Text('Пользователь успешно создан!'),
+              duration: Duration(seconds: 5),
               backgroundColor: Helpers.greenColor),
         );
         await Navigator.pushNamedAndRemoveUntil(
@@ -292,7 +291,6 @@ class _AuthFormState extends State<AuthForm> {
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),
       (route) => false);*/
-
       } else if (data.statusCode == 400) {
         final jsonData = json.decode(data.body);
         final create = VerifyResult.fromJson(jsonData);

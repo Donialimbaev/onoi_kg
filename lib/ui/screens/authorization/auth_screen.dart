@@ -6,14 +6,13 @@ import 'package:onoy_kg/ui/widgets/auth_form.dart';
 
 import '../../widgets/logo_appbar.dart';
 
-
 class AuthScreen extends StatefulWidget {
-
-  AuthScreen({required this.user});
+  
 
   static const String id = '/auth_screen';
 
-  final UserModel user;
+  final UserModel? user;
+  AuthScreen({ this.user});
 
   @override
   _AuthScreenState createState() => _AuthScreenState();
@@ -22,7 +21,8 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic>? rcvdData = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    final Map<String, dynamic>? rcvdData =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
 
     print("A data ${rcvdData?['user_type']}");
     print('A data $rcvdData');

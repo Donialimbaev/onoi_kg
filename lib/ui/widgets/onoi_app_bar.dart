@@ -14,13 +14,9 @@ import '../../managers/auth_button.dart';
 import '../../managers/token_manager.dart';
 import '../../service_locator.dart';
 
-
-class OnoiAppbar extends StatefulWidget with PreferredSizeWidget {
+class OnoiAppbar extends StatefulWidget {
   @override
   _OnoiAppbarState createState() => _OnoiAppbarState();
-
-  @override
-  Size get preferredSize => const Size.fromHeight(50.0);
 }
 
 class _OnoiAppbarState extends State<OnoiAppbar> {
@@ -74,8 +70,9 @@ class _OnoiAppbarState extends State<OnoiAppbar> {
 
   final Widget svg = SvgPicture.asset(
     'assets/images/dolon_icon.svg',
-      alignment: Alignment.topLeft, width: 100,
-      fit: BoxFit.fitWidth,
+    alignment: Alignment.topLeft,
+    width: 100,
+    fit: BoxFit.fitWidth,
   );
 
   @override
@@ -86,29 +83,26 @@ class _OnoiAppbarState extends State<OnoiAppbar> {
       backgroundColor: Colors.white,
       title: LogoAppbar(),
       actions: [
-          if (!_isLogin)
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
+        if (!_isLogin)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4.0)
-                    ),
+                        borderRadius: BorderRadius.circular(4.0)),
                     foregroundColor: Helpers.blueColor,
-                    backgroundColor: Helpers.blueLightColor
-                  ),
-                    onPressed: () {
-                      sl<AuthManager>().inRequestToggle.add('1');
-                      logIn();
+                    backgroundColor: Helpers.blueLightColor),
+                onPressed: () {
+                  sl<AuthManager>().inRequestToggle.add('1');
+                  logIn();
 
-                      print('Raised Button Pressed $_isLogin');
-                    },
-                    child: const Text('Войти')),
-                    
-              ),
-              // isLoginButton(),
-              
-         /* ElevatedButton(onPressed: (){
+                  print('Raised Button Pressed $_isLogin');
+                },
+                child: const Text('Войти')),
+          ),
+        // isLoginButton(),
+
+        /* ElevatedButton(onPressed: (){
           logOut();
         }, child: const Text('Logout')),
  */
@@ -134,8 +128,8 @@ class _OnoiAppbarState extends State<OnoiAppbar> {
     );
   }
 
-  Widget _statusResult(BuildContext context, UserModel data) {
-    if (data.userType == 'client') {
+  Widget _statusResult(BuildContext context, UserModel? data) {
+    if (data!.userType == 'client') {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 4),
         child: Container(
@@ -149,9 +143,12 @@ class _OnoiAppbarState extends State<OnoiAppbar> {
                 color: Colors.white,
               ),
               onPressed: () async {
-                   await Navigator.pushNamedAndRemoveUntil(
-                    context, AddItem.id, ModalRoute.withName(AddItem.id),
-                     arguments: {'userData': data},);
+                await Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  AddItem.id,
+                  ModalRoute.withName(AddItem.id),
+                  arguments: {'userData': data},
+                );
                 await Navigator.pushNamed(
                   context,
                   AddItem.id,
@@ -174,7 +171,7 @@ class _OnoiAppbarState extends State<OnoiAppbar> {
                 color: Colors.white,
               ),
               onPressed: () async {
-                (data.registered)
+                (data.registered == true)
                     ? await Navigator.pushNamed(
                         context,
                         AddTransport.id,
@@ -192,9 +189,9 @@ class _OnoiAppbarState extends State<OnoiAppbar> {
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4),
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
               ),
               foregroundColor: Helpers.blueColor,
               backgroundColor: Helpers.blueLightColor,

@@ -8,12 +8,12 @@ import 'package:onoy_kg/ui/helpers/helpers.dart';
 class ItemCard extends StatelessWidget {
   ItemCard(this.cargo);
 
-  final Results cargo;
+  final Results? cargo;
 
   @override
   Widget build(BuildContext context) {
     final dateFormat = DateFormat('yyyy-MM-DDThh:mm:ss');
-    final dateTime = dateFormat.parse(cargo.datePublished);
+    final dateTime = dateFormat.parse(cargo!.datePublished.toString());
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
       child: Card(
@@ -27,7 +27,7 @@ class ItemCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        cargo.name,
+                        cargo!.name.toString(),
                         style: Helpers.header1CardTextStyle,
                       ),
                     ],
@@ -49,7 +49,7 @@ class ItemCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 10.0),
                   Text(
-                    cargo.fromRegion + ', ' + cargo.fromCity,
+                    '${cargo!.fromRegion} + , + ${cargo!.fromCity.toString()}',
                     style: Helpers.hintStyle,
                   ),
                 ],
@@ -64,7 +64,7 @@ class ItemCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 10.0),
                   Text(
-                    cargo.toRegion + ', ' + cargo.toCity,
+                    '${cargo!.toRegion.toString()}, ${cargo!.toCity}',
                     style: Helpers.hintStyle,
                   )
                 ],
@@ -72,9 +72,10 @@ class ItemCard extends StatelessWidget {
               const SizedBox(height: 16.0),
               Row(
                 children: [
-                  Text(cargo.fromShipmentDate + '  -  ' + cargo.toShipmentDate),
+                  Text(
+                      '${cargo!.fromShipmentDate}- + ${cargo!.toShipmentDate}'),
                   const SizedBox(width: 20.0),
-                  Text('${cargo.weight}т / м³'),
+                  Text('${cargo!.weight}т / м³'),
                 ],
               ),
               const SizedBox(height: 20.0),
@@ -90,7 +91,7 @@ class ItemCard extends StatelessWidget {
                           Radius.circular(4.0),
                         )),
                     child: Text(
-                      '${cargo.price} c',
+                      '${cargo!.price} c',
                       style: Helpers.header1WhiteTextStyle,
                     ),
                   ),
@@ -136,7 +137,7 @@ class ItemCard extends StatelessWidget {
 
   void displayMore(BuildContext context) {
     final dateFormat = DateFormat('yyyy-mm-DDThh:mm:ssZ');
-    final dateTime = dateFormat.parse(cargo.datePublished);
+    final dateTime = dateFormat.parse(cargo!.datePublished.toString());
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -158,7 +159,7 @@ class ItemCard extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                cargo.name,
+                                cargo!.name.toString(),
                                 style: Helpers.header1CardTextStyle,
                               ),
                               //const SizedBox(width: 8.0),
@@ -185,7 +186,7 @@ class ItemCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 10.0),
                           Text(
-                            cargo.fromRegion + ', ' + cargo.fromCity,
+                            '${cargo!.fromRegion}, ${cargo!.fromCity}',
                             style: Helpers.hintStyle,
                           ),
                         ],
@@ -199,7 +200,7 @@ class ItemCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 10.0),
                         Text(
-                          cargo.toRegion + ', ' + cargo.toCity,
+                          '${cargo!.toRegion}, ${cargo!.toCity}',
                           style: Helpers.hintStyle,
                         )
                       ]),
@@ -207,10 +208,10 @@ class ItemCard extends StatelessWidget {
                       Row(children: [
                         Text(
                           // ignore: lines_longer_than_80_chars
-                          cargo.fromShipmentDate + '  -  ' + cargo.toShipmentDate,
+                          '${cargo!.fromShipmentDate} - ${cargo!.toShipmentDate}',
                         ),
                         const SizedBox(width: 20.0),
-                        Text('${cargo.weight}т / м³')
+                        Text('${cargo!.weight}т / м³')
                       ]),
                       const SizedBox(height: 20.0),
                       Row(children: [
@@ -224,7 +225,7 @@ class ItemCard extends StatelessWidget {
                                 Radius.circular(4.0),
                               )),
                           child: Text(
-                            '${cargo.price} c',
+                            '${cargo!.price} c',
                             style: Helpers.header1WhiteTextStyle,
                           ),
                         ),
@@ -238,21 +239,21 @@ class ItemCard extends StatelessWidget {
                             color: Helpers.greyColor,
                           )),
                       const SizedBox(height: 12.0),
-                      if (cargo.cargoComment != null)
+                      if (cargo!.cargoComment != null)
                         Text(
                           'Комментарий к отправке',
                           style: Helpers.hintStyle,
                         ),
-                      if (cargo.cargoComment != null)
+                      if (cargo!.cargoComment != null)
                         Text(
-                          cargo.cargoComment,
+                          cargo!.cargoComment.toString(),
                           style: Helpers.bottomSheetTextStyle,
                         ),
-                      if (cargo.vehicleComment != null)
+                      if (cargo!.vehicleComment != null)
                         Text('Комментарий к грузу', style: Helpers.hintStyle),
-                      if (cargo.vehicleComment != null)
+                      if (cargo!.vehicleComment != null)
                         Text(
-                          cargo.vehicleComment,
+                          cargo!.vehicleComment.toString(),
                           style: Helpers.bottomSheetTextStyle,
                         ),
                       const SizedBox(height: 20.0),
@@ -265,12 +266,12 @@ class ItemCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  cargo.user.name,
+                                  cargo!.user!.name!.toString(),
                                   style: Helpers.header1TextStyle,
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  cargo.user.phoneNumber,
+                                  cargo!.user!.phoneNumber.toString(),
                                   style: Helpers.header1TextStyle,
                                 ),
                               ],

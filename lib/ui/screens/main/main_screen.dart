@@ -15,6 +15,7 @@ import 'package:onoy_kg/ui/widgets/transport_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
+import '../../../managers/login_manager.dart';
 import 'main_tabs.dart';
 
 class MainScreen extends StatefulWidget {
@@ -37,7 +38,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Future<String?> _getToken() async {
-
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('jwt');
 
@@ -58,10 +58,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //sl<CargoManager>().inRequest.add(RequestCommand.UPDATE);
-   // sl<LoginManager>().inUser.add('MainStarted1');
+    // sl<CargoManager>().inRequest.add(RequestCommand.UPDATE);
+    sl<LoginManager>().inUser.add('MainStarted1');
     final query = Results();
-
 
     sl<MainManager>().inRequestToggle.add(query);
     sl<CargoManager>().inRequestTransportGet.add(query);
@@ -70,19 +69,18 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       key: _scaffoldKey,
-      appBar: OnoiAppbar(),
+      // appBar: OnoiAppbar(),
       drawer: DrawerMenu(),
       body: MainTabs(),
     );
   }
 
   Future<void> logOut(BuildContext context) async {
-
     final prefs = await SharedPreferences.getInstance();
     final result = await prefs.setString('jwt', '');
-     final query = Results();
+    final query = Results();
     //sl<CargoManager>().inRequest.add(RequestCommand.UPDATE);
-   // sl<LoginManager>().inUser.add('MainStarted2');
+    // sl<LoginManager>().inUser.add('MainStarted2');
     sl<MainManager>().inRequestToggle.add(query);
     sl<CargoManager>().inRequestTransportGet.add(query);
 
@@ -90,7 +88,6 @@ class _MainScreenState extends State<MainScreen> {
 
     await Navigator.popAndPushNamed(context, MainScreen.id);
   }
-
 
   void displayModalBottomSheet(BuildContext context) {
     sl<MainManager>().inRequestToggle.add(0 as Results);
@@ -135,7 +132,9 @@ class _MainScreenState extends State<MainScreen> {
                         inactiveFgColor: const Color(0xff909090),
                         labels: const ['Груз', 'Транспорт'],
                         onToggle: (index) {
-                          sl<MainManager>().inRequestToggle.add(index as Results);
+                          sl<MainManager>()
+                              .inRequestToggle
+                              .add(index as Results);
                         },
                       ),
                       InkWell(
@@ -181,7 +180,7 @@ class _MainScreenState extends State<MainScreen> {
                             return Text('${snapshot.data} (closed)');
                         }
                         // ignore: dead_code
-                        return null;
+                        return SizedBox();
                       }),
                 ],
               ),

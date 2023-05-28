@@ -1,4 +1,1 @@
-enum RequestCommand {
-  UPDATE,
-  START
-}
+enum RequestCommand { UPDATE, START }

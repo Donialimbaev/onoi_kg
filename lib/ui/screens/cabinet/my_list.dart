@@ -31,7 +31,7 @@ class MyList extends StatelessWidget {
             case ConnectionState.done:
               return Text('${snapshot.data} (closed)');
           }
-          return null; // unreachable
+          return SizedBox(); // unreachable
         },
       ),
     );

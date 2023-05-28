@@ -184,7 +184,7 @@ class _FilterItemsState extends State<FilterItems> {
                         case ConnectionState.done:
                           return Text('${snapshot.data} (closed)');
                       }
-                      return null; // unreachable
+                      return SizedBox(); // unreachable
                     },
                   ),
                   const SizedBox(height: 8.0),
@@ -213,7 +213,7 @@ class _FilterItemsState extends State<FilterItems> {
                           case ConnectionState.done:
                             return Text('${snapshot.data} (closed)');
                         }
-                        return null; // unreachable
+                        return SizedBox(); // unreachable
                       }),
                   const SizedBox(height: 20.0),
                   Text(
@@ -245,7 +245,7 @@ class _FilterItemsState extends State<FilterItems> {
                         case ConnectionState.done:
                           return Text('${snapshot.data} (closed)');
                       }
-                      return null; // unreachable
+                      return SizedBox(); // unreachable
                     },
                   ),
                   const SizedBox(height: 8.0),
@@ -273,7 +273,7 @@ class _FilterItemsState extends State<FilterItems> {
                           case ConnectionState.done:
                             return Text('${snapshot.data} (closed)');
                         }
-                        return null; // unreachable
+                        return SizedBox(); // unreachable
                       }),
                   const SizedBox(height: 20.0),
                   Text(
@@ -384,8 +384,8 @@ class _FilterItemsState extends State<FilterItems> {
                     children: [
                       InkWell(
                         onTap: () {
-                          sl<CargoManager>().inRegionSelected$.add(null);
-                          sl<CargoManager>().inRegionToSelected$.add(null);
+                          // sl<CargoManager>().inRegionSelected$.add(null);
+                          // sl<CargoManager>().inRegionToSelected$.add(null);
                           setState(() {
                             weightFromText.text = '';
                             weightToText.text = '';
@@ -535,7 +535,7 @@ class _FilterItemsState extends State<FilterItems> {
   }
 
   Widget _dropDownFromCities(BuildContext context, List<Cities> data) {
-    Cities selectedFromCity;
+    Cities? selectedFromCity;
     //logger.d(data);
     return Container(
       width: double.maxFinite,
@@ -583,7 +583,7 @@ class _FilterItemsState extends State<FilterItems> {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(
-                        items.name,
+                        items.name.toString(),
                         style: Helpers.header1TextStyle,
                       ),
                     );
@@ -615,7 +615,7 @@ class _FilterItemsState extends State<FilterItems> {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(
-                        items.name,
+                        items.name.toString(),
                         style: Helpers.header1TextStyle,
                       ),
                     );
@@ -675,7 +675,7 @@ class _FilterItemsState extends State<FilterItems> {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(
-                        items.name,
+                        items.name.toString(),
                         style: Helpers.header1TextStyle,
                       ),
                     );
@@ -692,7 +692,7 @@ class _FilterItemsState extends State<FilterItems> {
                     style: Helpers.hintStyle,
                   ),
                   // Not necessary for Option 1
-                  value: selectedToCity,
+                  // value: selectedToCity!.name.toString(),
                   onChanged: (newValue) {
                     print(newValue?.name);
                     print(newValue!.id);
@@ -707,7 +707,7 @@ class _FilterItemsState extends State<FilterItems> {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(
-                        items.name,
+                        items.name.toString(),
                         style: Helpers.header1TextStyle,
                       ),
                     );

@@ -91,32 +91,32 @@ class _AddTransportState extends State<AddTransport> {
       _formKey.currentState!.save();
       setState(() => loading = true);
 
-      print(_cargo.fromRegion);
-      print(_cargo.fromCity);
-      print(_cargo.fromShipmentDate);
-      print(_cargo.fromPlaceComment);
+      // print(_cargo.fromRegion);
+      // print(_cargo.fromCity);
+      // print(_cargo.fromShipmentDate);
+      // print(_cargo.fromPlaceComment);
 
-      print(_cargo.toRegion);
-      print(_cargo.toCity);
-      print(_cargo.toShipmentDate);
-      print(_cargo.toPlaceComment);
+      // print(_cargo.toRegion);
+      // print(_cargo.toCity);
+      // print(_cargo.toShipmentDate);
+      // print(_cargo.toPlaceComment);
 
-      print(_cargo.name);
-      print(_cargo.weight);
-      //print(_cargo.volume);
-      print(_cargo.length);
-      print(_cargo.width);
-      print(_cargo.height);
+      // print(_cargo.name);
+      // print(_cargo.weight);
+      // //print(_cargo.volume);
+      // print(_cargo.length);
+      // print(_cargo.width);
+      // print(_cargo.height);
 
-      print(_cargo.senderName);
-      print(_cargo.senderSurname);
-      print(_cargo.phoneNumber);
+      // print(_cargo.senderName);
+      // print(_cargo.senderSurname);
+      // print(_cargo.phoneNumber);
 
-      print(_cargo.price);
+      // print(_cargo.price);
 
-      print(_cargo.user.name);
-      print(_cargo.user.phoneNumber);
-      print(_cargo.user.userType);
+      // print(_cargo.user.name);
+      // print(_cargo.user.phoneNumber);
+      // print(_cargo.user.userType);
 
       //print(_cargo.user.userType);
       sl<CargoManager>().inRequestTransport.add(_cargo);
@@ -153,10 +153,10 @@ class _AddTransportState extends State<AddTransport> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2018),
       lastDate: DateTime(2030),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light(),
-          child: child,
+          child: child!,
         );
       },
     );
@@ -164,9 +164,9 @@ class _AddTransportState extends State<AddTransport> {
 
   @override
   Widget build(BuildContext context) {
-    final Object? args = ModalRoute.of(context)?.settings.arguments;
-    _cargo.user = args['userData'];
-    print('UserData ${args['userData']}');
+    UserModel? args = ModalRoute.of(context)!.settings.arguments as UserModel?;
+    _cargo.user = args;
+    // print('UserData ${args['userData']}');
 
     return Scaffold(
       appBar: AppBar(
@@ -217,7 +217,7 @@ class _AddTransportState extends State<AddTransport> {
                           case ConnectionState.done:
                             return Text('${snapshot.data} (closed)');
                         }
-                        return null; // unreachable
+                        return SizedBox(); // unreachable
                       },
                     ),
                     const SizedBox(height: 8.0),
@@ -251,7 +251,7 @@ class _AddTransportState extends State<AddTransport> {
                           return DropdownMenuItem<Cities>(
                             value: city,
                             child: Text(
-                              city.name,
+                              city.name.toString(),
                               style: Helpers.header1TextStyle,
                             ),
                           );
@@ -321,7 +321,7 @@ class _AddTransportState extends State<AddTransport> {
                           case ConnectionState.done:
                             return Text('${snapshot.data} (closed)');
                         }
-                        return null; // unreachable
+                        return SizedBox(); // unreachable
                       },
                     ),
                     const SizedBox(height: 8.0),
@@ -355,7 +355,7 @@ class _AddTransportState extends State<AddTransport> {
                           return DropdownMenuItem<Cities>(
                             value: city,
                             child: Text(
-                              city.name,
+                              city.name.toString(),
                               style: Helpers.header1TextStyle,
                             ),
                           );
@@ -498,7 +498,7 @@ class _AddTransportState extends State<AddTransport> {
                               case ConnectionState.done:
                                 return Text('${snapshot.data} (closed)');
                             }
-                            return null; // unreachable
+                            return SizedBox(); // unreachable
                           },
                         ),
                       ),
@@ -603,7 +603,7 @@ class _AddTransportState extends State<AddTransport> {
             print(newValue.name);
             selectedFromRegion = newValue;
             regionColorFrom = Helpers.greyColor;
-            selectedFromCity = null;
+            selectedFromCity;
             if (newValue.cities != null) {
               citiesFrom = [];
               citiesFrom = newValue.cities;
@@ -645,7 +645,7 @@ class _AddTransportState extends State<AddTransport> {
             print(newValue.name);
             selectedToRegion = newValue;
             regionColorTo = Helpers.greyColor;
-            selectedToCity = null;
+            selectedToCity;
             if (newValue.cities != null) {
               citiesTo = [];
               citiesTo = newValue.cities;

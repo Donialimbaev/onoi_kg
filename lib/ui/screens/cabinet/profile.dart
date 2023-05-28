@@ -66,7 +66,7 @@ class _ProfileState extends State<Profile> {
                   case ConnectionState.done:
                     return Text('${snapshot.data} (closed)');
                 }
-                return null; // unreachable
+                return SizedBox(); // unreachable
               },
             ),
             const SizedBox(height: 20),

@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             keyboardType: TextInputType.phone,
                             textInputAction: TextInputAction.next,
-                            validator: Helpers.validateMobile,
+                            // validator: Helpers.validateMobile,
                             onSaved: (value) {
                               _user.phoneNumber = value;
                             }),
@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             obscureText: true,
                             obscuringCharacter: '*',
-                            validator: Helpers.validatePassword,
+                            // validator: Helpers.validatePassword,
                             onSaved: (value) {
                               _user.password = value;
                             }),
@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                                 case ConnectionState.done:
                                   return Text('${snapshot.data} (closed)');
                               }
-                              return null; // unreachable
+                              return SizedBox(); // unreachable
                             },
                           ),
                         ),

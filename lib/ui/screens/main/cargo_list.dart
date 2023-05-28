@@ -35,7 +35,7 @@ class CargoList extends StatelessWidget {
               return Text('${snapshot.data} (closed)');
           }
           // ignore: dead_code
-          return null; // unreachable
+          return SizedBox(); // unreachable
         },
       ),
     );

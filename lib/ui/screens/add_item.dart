@@ -25,7 +25,7 @@ class AddItem extends StatefulWidget {
 
 class _AddItemState extends State<AddItem> {
   final _formKey = GlobalKey<FormState>();
-  final _cargo = Results();
+  final Results? _cargo = Results();
   late RegionResults selectedFromRegion;
   late RegionResults selectedToRegion;
   late Cities selectedFromCity;
@@ -48,81 +48,81 @@ class _AddItemState extends State<AddItem> {
     FocusScope.of(context).unfocus();
 
     
-    if (_cargo.fromRegion == null) {
+    if (_cargo!.fromRegion == null) {
       setState(() {
         regionColorFrom = Colors.red;
       });
     }
   
-    if (_cargo.fromCity == null) {
+    if (_cargo!.fromCity == null) {
       setState(() {
         cityColorFrom = Colors.red;
       });
     }
    
-    if (_cargo.toRegion == null) {
+    if (_cargo!.toRegion == null) {
       setState(() {
         regionColorTo = Colors.red;
       });
     }
    
-    if (_cargo.toCity == null) {
+    if (_cargo!.toCity == null) {
       setState(() {
         cityColorTo = Colors.red;
       });
     }
-    if (_cargo.fromShipmentDate == null) {
+    if (_cargo!.fromShipmentDate == null) {
       final today = DateTime.now();
       final month = Helpers.getMonth(today.month);
       fromDate = 'с ${today.day}  $month ${today.year}';
-      _cargo.fromShipmentDate = '${today.year}-${today.month}-${today.day}';
+      _cargo!.fromShipmentDate = '${today.year}-${today.month}-${today.day}';
       print(today);
     }
 
-    if (_cargo.toShipmentDate == null) {
+    if (_cargo!.toShipmentDate == null) {
       final today = DateTime.now();
       final month = Helpers.getMonth(today.month);
       toDate = 'с ${today.day}  $month ${today.year}';
-      _cargo.toShipmentDate = '${today.year}-${today.month}-${today.day}';
+      _cargo!.toShipmentDate = '${today.year}-${today.month}-${today.day}';
       print(today);
     }
 
     if (isValid &&
-        _cargo.fromRegion != null &&
-        _cargo.toRegion != null &&
-        _cargo.toCity != null &&
-        _cargo.fromCity != null) {
+        _cargo!.fromRegion != null &&
+        _cargo!.toRegion != null &&
+        _cargo!.toCity != null &&
+        _cargo!.fromCity != null) {
       _formKey.currentState!.save();
       setState(() => loading = true);
 
-      print(_cargo.fromRegion);
-      print(_cargo.fromCity);
-      print(_cargo.fromShipmentDate);
-      print(_cargo.fromPlaceComment);
+    //   print(_cargo!.fromRegion);
+    //   print(_cargo!.fromCity);
+    //   print(_cargo!.fromShipmentDate);
+    //   print(_cargo!.fromPlaceComment);
 
-      print(_cargo.toRegion);
-      print(_cargo.toCity);
-      print(_cargo.toShipmentDate);
-      print(_cargo.toPlaceComment);
+    //   print(_cargo!.toRegion);
+    //   print(_cargo!.toCity);
+    //   print(_cargo!.toShipmentDate);
+    //   print(_cargo!.toPlaceComment);
 
-      print(_cargo.name);
-      print(_cargo.weight);
-    //  print(_cargo.volume);
-      print(_cargo.length);
-      print(_cargo.width);
-      print(_cargo.height);
+    //   print(_cargo!.name);
+    //   print(_cargo!.weight);
+    // //  print(_cargo!.volume);
+    //   print(_cargo!.length);
+    //   print(_cargo!.width);
+    //   print(_cargo!.height);
 
-      print(_cargo.senderName);
-      print(_cargo.senderSurname);
-      print(_cargo.phoneNumber);
+    //   print(_cargo!.senderName);
+    //   print(_cargo!.senderSurname);
+    //   print(_cargo!.phoneNumber);
 
-      print(_cargo.price);
+    //   print(_cargo!.price);
 
-      print(_cargo.user.name);
-      print(_cargo.user.phoneNumber);
-      print(_cargo.user.userType);
+    //   print(_cargo!.user.name);
+    //   print(_cargo!.user.phoneNumber);
+    //   print(_cargo!.user.userType);
 
-      sl<CargoManager>().inRequestCargo.add(_cargo);
+      sl<CargoManager>().inRequestCargo.add(_cargo!);
     }
   }
 
@@ -133,7 +133,7 @@ class _AddItemState extends State<AddItem> {
 
     setState(() {
       fromDate = 'с ${order.day}  $month ${order.year}';
-      _cargo.fromShipmentDate = '${order.year}-${order.month}-${order.day}';
+      _cargo!.fromShipmentDate = '${order.year}-${order.month}-${order.day}';
     });
   }
 
@@ -144,7 +144,7 @@ class _AddItemState extends State<AddItem> {
 
     setState(() {
       toDate = 'с ${order.day}  $month ${order.year}';
-      _cargo.toShipmentDate = '${order.year}-${order.month}-${order.day}';
+      _cargo!.toShipmentDate = '${order.year}-${order.month}-${order.day}';
     });
   }
 
@@ -154,10 +154,10 @@ class _AddItemState extends State<AddItem> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2018),
       lastDate: DateTime(2030),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light(),
-          child: child,
+          child: child!,
         );
       },
     );
@@ -165,9 +165,10 @@ class _AddItemState extends State<AddItem> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments;
-    _cargo.user = args['userData'];
-    print('UserData ${args['userData']}');
+    UserModel? args = ModalRoute.of(context)!.settings.arguments as UserModel?;
+ 
+    _cargo!.user = args;
+    // print('UserData ${args['userData']}');
     return Scaffold(
       appBar: AppBar(
         title: title(),
@@ -226,7 +227,7 @@ class _AddItemState extends State<AddItem> {
                             return Text('${snapshot.data} (closed)');
                         }
                         // ignore: dead_code
-                        return null; // unreachable
+                        return SizedBox(); // unreachable
                       },
                     ),
                     const SizedBox(height: 8.0),
@@ -250,7 +251,7 @@ class _AddItemState extends State<AddItem> {
                         onChanged: (newValue) {
                           logger.d(newValue!.name);
                           logger.d(newValue.id);
-                          _cargo.fromCity = newValue.id.toString();
+                          _cargo!.fromCity = newValue.id.toString();
                           setState(() {
                             cityColorFrom = Helpers.greyColor;
                             selectedFromCity = newValue;
@@ -260,7 +261,7 @@ class _AddItemState extends State<AddItem> {
                           return DropdownMenuItem<Cities>(
                             value: city,
                             child: Text(
-                              city.name,
+                              city.name.toString(),
                               style: Helpers.header1TextStyle,
                             ),
                           );
@@ -313,7 +314,7 @@ class _AddItemState extends State<AddItem> {
                           textInputAction: TextInputAction.newline,
                           maxLines: 5,
                           onSaved: (value) {
-                            _cargo.fromPlaceComment = value!;
+                            _cargo!.fromPlaceComment = value!;
                           },
                         )),
                     const SizedBox(height: 20.0),
@@ -347,7 +348,7 @@ class _AddItemState extends State<AddItem> {
                             return Text('${snapshot.data} (closed)');
                         }
                         // ignore: dead_code
-                        return null; // unreachable
+                        return SizedBox(); // unreachable
                       },
                     ),
                     const SizedBox(height: 8.0),
@@ -371,7 +372,7 @@ class _AddItemState extends State<AddItem> {
                         onChanged: (newValue) {
                           logger.d(newValue!.name);
                           logger.d(newValue.id);
-                          _cargo.toCity = newValue.id.toString();
+                          _cargo!.toCity = newValue.id.toString();
                           setState(() {
                             cityColorTo = Helpers.greyColor;
                             selectedToCity = newValue;
@@ -381,7 +382,7 @@ class _AddItemState extends State<AddItem> {
                           return DropdownMenuItem<Cities>(
                             value: city,
                             child: Text(
-                              city.name,
+                              city.name.toString(),
                               style: Helpers.header1TextStyle,
                             ),
                           );
@@ -434,7 +435,7 @@ class _AddItemState extends State<AddItem> {
                           textInputAction: TextInputAction.newline,
                           maxLines: 5,
                           onSaved: (value) {
-                            _cargo.toPlaceComment = value!;
+                            _cargo!.toPlaceComment = value!;
                           },
                         )),
                     Padding(
@@ -459,7 +460,7 @@ class _AddItemState extends State<AddItem> {
                           return null;
                         },
                         onSaved: (value) {
-                          _cargo.name = value!;
+                          _cargo!.name = value!;
                         }),
                     const SizedBox(height: 8.0),
                     TextFormField(
@@ -477,7 +478,7 @@ class _AddItemState extends State<AddItem> {
                         return null;
                       },
                       onSaved: (value) {
-                        _cargo.weight = value;
+                        _cargo!.weight = value;
                       },
                     ),
                     const SizedBox(height: 8.0),
@@ -490,7 +491,7 @@ class _AddItemState extends State<AddItem> {
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
                       onSaved: (value) {
-                    //    _cargo.volume = value;
+                    //    _cargo!.volume = value;
                       },
                     ),
                     const SizedBox(height: 8.0),
@@ -503,7 +504,7 @@ class _AddItemState extends State<AddItem> {
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
                       onSaved: (value) {
-                        _cargo.length = value!;
+                        _cargo!.length = value!;
                       },
                     ),
                     const SizedBox(height: 8.0),
@@ -516,7 +517,7 @@ class _AddItemState extends State<AddItem> {
                       keyboardType: TextInputType.phone,
                       textInputAction: TextInputAction.next,
                       onSaved: (value) {
-                        _cargo.width = value!;
+                        _cargo!.width = value!;
                       },
                     ),
                     const SizedBox(height: 8.0),
@@ -528,7 +529,7 @@ class _AddItemState extends State<AddItem> {
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,
                         onSaved: (value) {
-                          _cargo.height = value!;
+                          _cargo!.height = value!;
                         }),
                     const SizedBox(height: 8.0),
                     Container(
@@ -543,7 +544,7 @@ class _AddItemState extends State<AddItem> {
                           textInputAction: TextInputAction.newline,
                           maxLines: 5,
                           onSaved: (value) {
-                            _cargo.cargoComment = value!;
+                            _cargo!.cargoComment = value!;
                           },
                         )),
                     const SizedBox(height: 30),
@@ -564,7 +565,7 @@ class _AddItemState extends State<AddItem> {
                           return null;
                         },
                         onSaved: (value) {
-                          _cargo.senderName = value!;
+                          _cargo!.senderName = value!;
                         }),
                     const SizedBox(height: 8),
                     TextFormField(
@@ -581,7 +582,7 @@ class _AddItemState extends State<AddItem> {
                           return null;
                         },
                         onSaved: (value) {
-                          _cargo.senderSurname = value!;
+                          _cargo!.senderSurname = value!;
                         }),
                     const SizedBox(height: 8),
                     Container(
@@ -602,9 +603,9 @@ class _AddItemState extends State<AddItem> {
                               ),
                               keyboardType: TextInputType.phone,
                               textInputAction: TextInputAction.next,
-                              validator: Helpers.validateMobile,
+                              // validator: Helpers.validateMobile,
                               onSaved: (value) {
-                                _cargo.phoneNumber = value!;
+                                _cargo!.phoneNumber = value!;
                               },
                             ),
                           ),
@@ -663,7 +664,7 @@ class _AddItemState extends State<AddItem> {
                           return null;
                         },
                         onSaved: (value) {
-                          _cargo.price = value;
+                          _cargo!.price = value;
                         }),
                     const SizedBox(height: 20.0),
                     Visibility(
@@ -691,7 +692,7 @@ class _AddItemState extends State<AddItem> {
                                 return Text('${snapshot.data} (closed)');
                             }
                             // ignore: dead_code
-                            return null; // unreachable
+                            return SizedBox(); // unreachable
                           },
                         ),
                       ),
@@ -718,7 +719,7 @@ class _AddItemState extends State<AddItem> {
                           onPressed: _trySubmit,
                           /* onPressed: () {
                             _formKey.currentState.save();
-                            sl<CargoManager>().inRequestCargo.add(_cargo);
+                            sl<CargoManager>().inRequestCargo.add(_cargo!);
                           },*/
                           child: const Text(
                             'Разместить',
@@ -789,12 +790,12 @@ class _AddItemState extends State<AddItem> {
         onChanged: (newValue) {
           print(newValue!.name);
           print(newValue.id);
-          _cargo.fromRegion = newValue.id.toString();
+          _cargo!.fromRegion = newValue.id.toString();
           setState(() {
             print(newValue.name);
             regionColorFrom = Helpers.greyColor;
             selectedFromRegion = newValue;
-            selectedFromCity = null;
+            selectedFromCity;
             if (newValue.cities != null) {
               citiesFrom = [];
               citiesFrom = newValue.cities;
@@ -838,12 +839,12 @@ class _AddItemState extends State<AddItem> {
         onChanged: (newValue) {
           print(newValue!.name);
           print(newValue.id);
-          _cargo.toRegion = newValue.id.toString();
+          _cargo!.toRegion = newValue.id.toString();
           setState(() {
             print(newValue.name);
             regionColorTo = Helpers.greyColor;
             selectedToRegion = newValue;
-            selectedToCity = null;
+            selectedToCity;
             if (newValue.cities != null) {
               citiesTo = [];
               citiesTo = newValue.cities;

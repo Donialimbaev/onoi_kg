@@ -1,7 +1,6 @@
 import 'package:onoy_kg/models/user.dart';
 
 class Results {
-
   Results.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     fromRegion = json['from_region'];
@@ -27,75 +26,73 @@ class Results {
     price = json['price'];
     senderName = json['sender_name'];
     senderSurname = json['sender_surname'];
-    user = (json['user'] != null ?  UserModel.fromJson(json['user']) : null)!;
+    user = (json['user'] != null ? UserModel.fromJson(json['user']) : null)!;
   }
 
-  Results(
-      { this.id,
-        this.fromRegion,
-        this.fromCity,
-        this.toRegion,
-        this.toCity,
-        this.datePublished,
-        this.fromPlaceComment,
-        this.toPlaceComment,
-        this.cargoComment,
-        this.vehicleComment,
-        this.fromShipmentDate,
-        this.toShipmentDate,
-        this.name,
-        this.weight,
-        this.height,
-        this.length,
-        this.volume,
-        this.phoneNumber,
-        this.whatsappNumber,
-        this.telegramNumber,
-        this.price,
-        this.senderName,
-        this.senderSurname,
-        this.user,
-        this.weightFrom,
-        this.weightTo,
-        this.priceFrom,
-        this.priceTo,
-
-      }) {
-          
-          throw UnimplementedError();
-        }
-  late int id;
-  late String fromRegion;
-  late String fromCity;
-  late String toRegion;
-  late String toCity;
-  late String datePublished;
-  late String fromPlaceComment;
-  late String toPlaceComment;
-  late String cargoComment;
-  late String vehicleComment;
-  late String fromShipmentDate;
-  late String toShipmentDate;
-  late String name;
-  late dynamic weight;
-  late String height;
-  late String length;
+  Results({
+    this.id,
+    this.fromRegion,
+    this.fromCity,
+    this.toRegion,
+    this.toCity,
+    this.datePublished,
+    this.fromPlaceComment,
+    this.toPlaceComment,
+    this.cargoComment,
+    this.vehicleComment,
+    this.fromShipmentDate,
+    this.toShipmentDate,
+    this.name,
+    this.weight,
+    this.height,
+    this.length,
+    this.volume,
+    this.phoneNumber,
+    this.whatsappNumber,
+    this.telegramNumber,
+    this.price,
+    this.senderName,
+    this.senderSurname,
+    this.user,
+    this.weightFrom,
+    this.weightTo,
+    this.priceFrom,
+    this.priceTo,
+  }) {
+    throw UnimplementedError();
+  }
+  int? id;
+  String? fromRegion;
+  String? fromCity;
+  String? toRegion;
+  String? toCity;
+  String? datePublished;
+  String? fromPlaceComment;
+  String? toPlaceComment;
+  String? cargoComment;
+  String? vehicleComment;
+  String? fromShipmentDate;
+  String? toShipmentDate;
+  String? name;
+  dynamic weight;
+  String? height;
+  String? length;
   dynamic volume;
-  late String width;
-  late String phoneNumber;
-  late String whatsappNumber;
-  late String telegramNumber;
+  String? width;
+  String? phoneNumber;
+  String? whatsappNumber;
+  String? telegramNumber;
   dynamic price;
-  late String senderName;
-  late String senderSurname;
-  late UserModel user;
-  late String weightFrom;
-  late String weightTo;
-  late String priceFrom;
-  late String priceTo;
+  String? senderName;
+  String? senderSurname;
+  UserModel? user;
+  String? weightFrom;
+  String? weightTo;
+  String? priceFrom;
+  String? priceTo;
 
   Map<String, dynamic> toJson() {
-    final data =  <String, dynamic>{};
+    final data = <String, dynamic>{};
     data['id'] = id;
     data['from_region'] = fromRegion;
     data['from_city'] = fromCity;
@@ -121,7 +118,7 @@ class Results {
     data['sender_surname'] = senderSurname;
     // ignore: unnecessary_null_comparison
     if (user != null) {
-      data['user'] = user.toJson();
+      data['user'] = user!.toJson();
     }
     return data;
   }

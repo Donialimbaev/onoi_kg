@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, unused_local_variable, dead_code, unnecessary_null_comparison, lines_longer_than_80_chars
+// ignore_for_file: unused_import, unused_local_variable, dead_code, unnecessary_SizedBox()_comparison, lines_longer_than_80_chars
 
 import 'package:flutter/material.dart';
 import 'package:onoy_kg/managers/cargo_manager.dart';
@@ -32,7 +32,7 @@ class _FilterTransportState extends State<FilterTransport> {
   final priceFromText = TextEditingController();
   final priceToText = TextEditingController();
   bool weightFrom() {
-    if (_cargoResult.weightFrom == '' || _cargoResult.weightFrom == null) {
+    if (_cargoResult.weightFrom == '' || _cargoResult.weightFrom == SizedBox()) {
       return false;
     } else {
       return true;
@@ -40,7 +40,7 @@ class _FilterTransportState extends State<FilterTransport> {
   }
 
   bool weightTo() {
-    if (_cargoResult.weightTo == '' || _cargoResult.weightTo == null) {
+    if (_cargoResult.weightTo == '' || _cargoResult.weightTo == SizedBox()) {
       return false;
     } else {
       return true;
@@ -48,7 +48,7 @@ class _FilterTransportState extends State<FilterTransport> {
   }
 
   bool priceFrom() {
-    if (_cargoResult.priceFrom == '' || _cargoResult.priceFrom == null) {
+    if (_cargoResult.priceFrom == '' || _cargoResult.priceFrom == SizedBox()) {
       return false;
     } else {
       return true;
@@ -57,7 +57,7 @@ class _FilterTransportState extends State<FilterTransport> {
 
   bool priceTo() {
     logger.d(_cargoResult.priceTo);
-    if (_cargoResult.priceTo == '' || _cargoResult.priceTo == null) {
+    if (_cargoResult.priceTo == '' || _cargoResult.priceTo == SizedBox()) {
       return false;
     } else {
       return true;
@@ -180,7 +180,7 @@ class _FilterTransportState extends State<FilterTransport> {
                         case ConnectionState.done:
                           return Text('${snapshot.data} (closed)');
                       }
-                      return null; // unreachable
+                      return SizedBox(); // unreachable
                     },
                   ),
                   const SizedBox(height: 8.0),
@@ -209,7 +209,7 @@ class _FilterTransportState extends State<FilterTransport> {
                           case ConnectionState.done:
                             return Text('${snapshot.data} (closed)');
                         }
-                        return null; // unreachable
+                        return SizedBox(); // unreachable
                       }),
                   const SizedBox(height: 20.0),
                   Text(
@@ -241,7 +241,7 @@ class _FilterTransportState extends State<FilterTransport> {
                         case ConnectionState.done:
                           return Text('${snapshot.data} (closed)');
                       }
-                      return null; // unreachable
+                      return SizedBox(); // unreachable
                     },
                   ),
                   const SizedBox(height: 8.0),
@@ -269,7 +269,7 @@ class _FilterTransportState extends State<FilterTransport> {
                           case ConnectionState.done:
                             return Text('${snapshot.data} (closed)');
                         }
-                        return null; // unreachable
+                        return SizedBox(); // unreachable
                       }),
                   const SizedBox(height: 20.0),
                   Text(
@@ -380,8 +380,8 @@ class _FilterTransportState extends State<FilterTransport> {
                     children: [
                       InkWell(
                         onTap: () {
-                          sl<CargoManager>().inRegionTSelected$.add(null);
-                          sl<CargoManager>().inTRegionToSelected$.add(null);
+                          // sl<CargoManager>().inRegionTSelected$.add(null);
+                          // sl<CargoManager>().inTRegionToSelected$.add(null);
                           setState(() {
                             weightFromText.text = '';
                             weightToText.text = '';
@@ -442,8 +442,8 @@ class _FilterTransportState extends State<FilterTransport> {
                 print(newValue.id);
                 _cargoResult.fromRegion = newValue.id.toString();
                 logger.d('DropDownREgion $newValue');
-                //  sl<CargoManager>().inCitySelected$.add(null);
-                if (newValue.cities != null) {
+                //  sl<CargoManager>().inCitySelected$.add(SizedBox());
+                if (newValue.cities != SizedBox()) {
                   citiesFrom = [];
                   citiesFrom = newValue.cities;
                   logger.d('DropDownREgion ${citiesFrom.length}');
@@ -502,8 +502,8 @@ class _FilterTransportState extends State<FilterTransport> {
                 print(newValue.id);
                 _cargoResult.toRegion = newValue.id.toString();
                 logger.d('DropDownREgion $newValue');
-                //  sl<CargoManager>().inCitySelected$.add(null);
-                if (newValue.cities != null) {
+                //  sl<CargoManager>().inCitySelected$.add(SizedBox());
+                if (newValue.cities != SizedBox()) {
                   citiesFrom = [];
                   citiesFrom = newValue.cities;
                   logger.d('DropDownREgion ${citiesFrom.length}');
@@ -579,7 +579,7 @@ class _FilterTransportState extends State<FilterTransport> {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(
-                        items.name,
+                        items.name.toString(),
                         style: Helpers.header1TextStyle,
                       ),
                     );
@@ -596,7 +596,7 @@ class _FilterTransportState extends State<FilterTransport> {
                     style: Helpers.hintStyle,
                   ),
                   // Not necessary for Option 1
-                  value: selectedFromCity,
+                  // value: selectedFromCity,
                   onChanged: (newValue) {
                     print(newValue!.name);
                     print(newValue.id);
@@ -611,7 +611,7 @@ class _FilterTransportState extends State<FilterTransport> {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(
-                        items.name,
+                        items.name.toString(),
                         style: Helpers.header1TextStyle,
                       ),
                     );
@@ -671,7 +671,7 @@ class _FilterTransportState extends State<FilterTransport> {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(
-                        items.name,
+                        items.name.toString(),
                         style: Helpers.header1TextStyle,
                       ),
                     );
@@ -688,7 +688,7 @@ class _FilterTransportState extends State<FilterTransport> {
                     style: Helpers.hintStyle,
                   ),
                   // Not necessary for Option 1
-                  value: selectedToCity,
+                  // value: selectedToCity,
                   onChanged: (newValue) {
                     print(newValue!.name);
                     print(newValue.id);
@@ -703,7 +703,7 @@ class _FilterTransportState extends State<FilterTransport> {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(
-                        items.name,
+                        items.name.toString(),
                         style: Helpers.header1TextStyle,
                       ),
                     );
